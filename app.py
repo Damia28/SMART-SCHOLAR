@@ -366,7 +366,7 @@ scholarships_data = load_all_174_scholarships()
 TEXT = {
     "BM": {
         "title": "🎓 SMART-SCHOLAR MALAYSIA",
-        "subtitle": "Portal Pembiayaan & Biasiswa Inklusif (Padanan Keputusan SPM Semua Gred)",
+        "subtitle": "Portal Pembiayaan & Biasiswa Inklusif",
         "badge_oku": "♿ Terbuka Kepada Semua Gred (A+, A, B, C, D, E)",
         "sidebar_header": "⚙️ Tetapan & Profil Pelajar",
         "student_name_label": "👤 Nama Penuh Pemohon",
@@ -378,7 +378,7 @@ TEXT = {
         "course_label": "📚 Bidang Pengajian Khusus",
         "income_label": "💰 Kategori Pendapatan Isi Rumah",
         "oku_label": "♿ Adakah anda Pemegang Kad OKU?",
-        "spm_section": "📊 Keputusan SPM Keseluruhan (Gred A - E)",
+        "_section": "📊 Keputusan SPM Keseluruhan (Gred A - E)",
         "grade_a_label": "Gred A+, A, A- (Cemerlang)",
         "grade_b_label": "Gred B+, B (Kepujian Tinggi)",
         "grade_c_label": "Gred C+, C (Kepujian / Credit)",
@@ -399,7 +399,7 @@ TEXT = {
     },
     "EN": {
         "title": "🎓 SMART-SCHOLAR MALAYSIA",
-        "subtitle": "Inclusive Scholarship & Financial Aid Portal (All SPM Grade Match)",
+        "subtitle": "Inclusive Scholarship & Financial Aid Portal",
         "badge_oku": "♿ Accessible for All Grades (A+, A, B, C, D, E)",
         "sidebar_header": "⚙️ Settings & Student Profile",
         "student_name_label": "👤 Applicant Full Name",
