@@ -1,5 +1,6 @@
 import streamlit as st
 import base64
+import re
 from io import BytesIO
 from gtts import gTTS
 
@@ -115,8 +116,8 @@ def load_all_174_scholarships():
         "courses": ["MED", "ENG", "ISLAMIC", "FIN", "ACCT_PROF", "IT"],
         "requirements": {"min_a": 7, "min_credits": 7, "min_passes": 7},
         "funding_details": {
-            "BM": "Biasiswa penuh / pinjaman boleh ubah merangkumi yuran pengajian, asrama, dan elaun sara hidup.",
-            "EN": "Full scholarship / convertible loan covering tuition fees, hostel, and monthly subsistence allowance."
+            "BM": "Biasiswa penuh atau pinjaman boleh ubah merangkumi yuran pengajian, asrama, dan elaun sara hidup.",
+            "EN": "Full scholarship or convertible loan covering tuition fees, hostel, and monthly subsistence allowance."
         },
         "deadline": "2026-07-09",
         "url": OFFICIAL_URLS["Terengganu"]
@@ -132,8 +133,8 @@ def load_all_174_scholarships():
         "courses": ["ACCT_PROF", "FIN"],
         "requirements": {"min_a": 5, "min_credits": 5, "min_passes": 5},
         "funding_details": {
-            "BM": "Pembiayaan penuh / pembiayaan boleh ubah tanpa faedah meliputi yuran pengajian, yuran peperiksaan, pendaftaran badan profesional, dan elaun sara hidup.",
-            "EN": "Full funding / interest-free convertible financing covering tuition fees, exam fees, professional body registration, and living allowance."
+            "BM": "Pembiayaan penuh atau pembiayaan boleh ubah tanpa faedah meliputi yuran pengajian, yuran peperiksaan, pendaftaran badan profesional, dan elaun sara hidup.",
+            "EN": "Full funding or interest-free convertible financing covering tuition fees, exam fees, professional body registration, and living allowance."
         },
         "deadline": "2026-09-30",
         "url": OFFICIAL_URLS["PENERAJU"]
@@ -149,8 +150,8 @@ def load_all_174_scholarships():
         "courses": ["ACCT_PROF", "FIN"],
         "requirements": {"min_a": 5, "min_credits": 5, "min_passes": 5},
         "funding_details": {
-            "BM": "Penajaan penuh meliputi yuran pengajian FIA & ACCA, yuran peperiksaan, bahan pembelajaran, dan pembangunan kemahiran insaniah.",
-            "EN": "Full sponsorship covering FIA & ACCA tuition fees, examination fees, learning materials, and soft skills development."
+            "BM": "Penajaan penuh meliputi yuran pengajian FIA dan ACCA, yuran peperiksaan, bahan pembelajaran, dan pembangunan kemahiran insaniah.",
+            "EN": "Full sponsorship covering FIA and ACCA tuition fees, examination fees, learning materials, and soft skills development."
         },
         "deadline": "2026-09-30",
         "url": OFFICIAL_URLS["MYPAC"]
@@ -183,8 +184,8 @@ def load_all_174_scholarships():
         "courses": ["TVET", "ENG", "IT"],
         "requirements": {"min_a": 0, "min_credits": 0, "min_passes": 1},
         "funding_details": {
-            "BM": "Elaun bulanan RM300 - RM360 sepanjang tempoh pengajian di Kolej Komuniti & Politeknik.",
-            "EN": "Monthly allowance of RM300 - RM360 throughout study duration in Kolej Komuniti & Politeknik."
+            "BM": "Elaun bulanan RM300 hingga RM360 sepanjang tempoh pengajian di Kolej Komuniti dan Politeknik.",
+            "EN": "Monthly allowance of RM300 to RM360 throughout study duration in Kolej Komuniti and Politeknik."
         },
         "deadline": "2026-12-31",
         "url": OFFICIAL_URLS["KPT_BKPKK"]
@@ -200,15 +201,15 @@ def load_all_174_scholarships():
         "courses": ["ISLAMIC", "EDU", "LAW"],
         "requirements": {"min_a": 0, "min_credits": 0, "min_passes": 1},
         "funding_details": {
-            "BM": "Bantuan pendaftaran IPT *one-off* + bantuan yuran pengajian untuk pelajar B40 beragama Islam.",
-            "EN": "One-off IPT registration aid + tuition assistance for Muslim B40 students."
+            "BM": "Bantuan pendaftaran IPT sekali sahaja dan bantuan yuran pengajian untuk pelajar B40 beragama Islam.",
+            "EN": "One-off IPT registration aid and tuition assistance for Muslim B40 students."
         },
         "deadline": "2026-11-30",
         "url": OFFICIAL_URLS["Zakat_Terengganu"]
       },
       {
         "id": 8,
-        "name": "Biasiswa TVET Madani & Kemahiran Sijil/Diploma",
+        "name": "Biasiswa TVET Madani & Kemahiran Sijil / Diploma",
         "provider": "Kolej Yayasan Negeri Sembilan",
         "category": "State Government",
         "target_income": ["B40", "M40"],
@@ -234,8 +235,8 @@ def load_all_174_scholarships():
         "courses": ["ACCT_PROF", "FIN", "ENG", "IT", "MED", "TVET", "ISLAMIC", "LAW", "COMM", "BUILT", "EDU"],
         "requirements": {"min_a": 0, "min_credits": 3, "min_passes": 3},
         "funding_details": {
-            "BM": "Pembiayaan pendidikan meliputi yuran pengajian diploma/ijazah & elaun sara hidup bulanan.",
-            "EN": "Education financing covering diploma and degree tuition fee & monthly living allowances."
+            "BM": "Pembiayaan pendidikan meliputi yuran pengajian diploma dan ijazah serta elaun sara hidup bulanan.",
+            "EN": "Education financing covering diploma and degree tuition fee and monthly living allowances."
         },
         "deadline": "2026-12-31",
         "url": OFFICIAL_URLS["PTPTN"]
@@ -251,8 +252,8 @@ def load_all_174_scholarships():
         "courses": ["ACCT_PROF", "FIN", "ENG", "IT", "MED", "TVET", "ISLAMIC", "LAW", "COMM", "BUILT", "EDU"],
         "requirements": {"min_a": 0, "min_credits": 0, "min_passes": 1},
         "funding_details": {
-            "BM": "Bantuan kewangan khas RM300/bulan (RM3,600/tahun) bagi pelajar OKU berdaftar.",
-            "EN": "RM300/month (RM3,600/year) special financial assistance for certified disabled students."
+            "BM": "Bantuan kewangan khas RM300 sebulan atau RM3,600 setahun bagi pelajar OKU berdaftar.",
+            "EN": "RM300 per month or RM3,600 per year special financial assistance for certified disabled students."
         },
         "deadline": "2026-12-31",
         "url": OFFICIAL_URLS["BKOKU"]
@@ -260,7 +261,6 @@ def load_all_174_scholarships():
     ]
 
     all_data = list(base_scholarships)
-    
     cat_cycle = ["State Government", "Zakat", "Corporate", "Government"]
     course_keys = list(COURSE_TRANSLATIONS.keys())
     
@@ -279,8 +279,8 @@ def load_all_174_scholarships():
             "courses": ["ENG", "MED", "IT", "ACCT_PROF", "FIN", "LAW"],
             "requirements": {"min_a": 0 if current_id % 2 == 0 else 3, "min_credits": 3, "min_passes": 3},
             "funding_details": {
-                "BM": f"Pinjaman boleh ubah / Biasiswa penuh pengajian tinggi anak negeri {state}.",
-                "EN": f"Convertible loan / Full tertiary scholarship for anak negeri {state}."
+                "BM": f"Pinjaman boleh ubah atau Biasiswa penuh pengajian tinggi anak negeri {state}.",
+                "EN": f"Convertible loan or Full tertiary scholarship for anak negeri {state}."
             },
             "deadline": "2026-08-31",
             "url": OFFICIAL_URLS.get(state, OFFICIAL_URLS["Generic_Search"])
@@ -301,8 +301,8 @@ def load_all_174_scholarships():
             "courses": ["ISLAMIC", "EDU", "LAW", "ACCT_PROF"],
             "requirements": {"min_a": 0, "min_credits": 0, "min_passes": 1},
             "funding_details": {
-                "BM": f"Bantuan pendaftaran IPT & sara hidup bagi golongan asnaf / B40 negeri {state}.",
-                "EN": f"IPT registration & living aid for asnaf / B40 students in {state}."
+                "BM": f"Bantuan pendaftaran IPT dan sara hidup bagi golongan asnaf atau B40 negeri {state}.",
+                "EN": f"IPT registration and living aid for asnaf or B40 students in {state}."
             },
             "deadline": "2026-11-30",
             "url": OFFICIAL_URLS.get(zakat_url_key, OFFICIAL_URLS["Generic_Search"])
@@ -339,7 +339,7 @@ def load_all_174_scholarships():
 
         all_data.append({
             "id": current_id,
-            "name": f"Bantuan & Dermasiswa {c_cat} #{current_id}",
+            "name": f"Bantuan dan Dermasiswa {c_cat} #{current_id}",
             "provider": f"Institusi / Badan {c_cat} Malaysia",
             "category": c_cat,
             "target_income": ["B40", "M40"] if current_id % 2 == 0 else ["B40", "M40", "T20"],
@@ -365,7 +365,7 @@ scholarships_data = load_all_174_scholarships()
 # ---------------------------------------------------------
 TEXT = {
     "BM": {
-        "title": "🎓 SMART-SCHOLAR MALAYSIA",
+        "title": "🎓 SMART-SCHOLAR MALAYSIA 2026",
         "subtitle": "Portal Pembiayaan & Biasiswa Inklusif (Padanan Keputusan SPM Semua Gred)",
         "badge_oku": "♿ Terbuka Kepada Semua Gred (A+, A, B, C, D, E)",
         "sidebar_header": "⚙️ Tetapan & Profil Pelajar",
@@ -387,7 +387,7 @@ TEXT = {
         "btn_generate": "🔍 CARI BIASISWA SAYA",
         "results_header": "🎯 Hasil Padanan Biasiswa & Pembiayaan Khusus Bidang",
         "matched_count": "Padanan Ditemui",
-        "tts_button": "🔊 Baca Senarai Ini (Text-to-Speech)",
+        "tts_button": "🔊 Baca Keseluruhan Keputusan (Text-to-Speech)",
         "apply_button": "🌐 Layari Portal Rasmi Permohonan",
         "deadline_label": "Tarikh Tutup",
         "courses_label": "Kursus Dibenarkan",
@@ -398,7 +398,7 @@ TEXT = {
         "generate_statement_btn": "Jana Draf Kenyataan Peribadi",
     },
     "EN": {
-        "title": "🎓 SMART-SCHOLAR MALAYSIA",
+        "title": "🎓 SMART-SCHOLAR MALAYSIA 2026",
         "subtitle": "Inclusive Scholarship & Financial Aid Portal (All SPM Grade Match)",
         "badge_oku": "♿ Accessible for All Grades (A+, A, B, C, D, E)",
         "sidebar_header": "⚙️ Settings & Student Profile",
@@ -420,7 +420,7 @@ TEXT = {
         "btn_generate": "🔍 GENERATE MATCHING SCHOLARSHIPS",
         "results_header": "🎯 Matched Financial Aid & Field-Specific Scholarships",
         "matched_count": "Scholarships Matched",
-        "tts_button": "🔊 Read List Out Loud (Text-to-Speech)",
+        "tts_button": "🔊 Read Full Results Out Loud (Text-to-Speech)",
         "apply_button": "🌐 Visit Official Application Portal",
         "deadline_label": "Deadline",
         "courses_label": "Applicable Courses",
@@ -437,9 +437,18 @@ if "lang" not in st.session_state:
 if "high_contrast" not in st.session_state:
     st.session_state.high_contrast = False
 
+def clean_text_for_speech(raw_text):
+    """Removes special markdown symbols, HTML tags, and extra formatting for clean speech output."""
+    clean = re.sub(r'<[^>]+>', '', raw_text)
+    clean = re.sub(r'[*_#~`]', '', clean)
+    clean = re.sub(r'\s+', ' ', clean).strip()
+    return clean
+
 def generate_audio_player(text_to_speak, lang_code="ms"):
+    """Generates an HTML5 audio player using Google TTS."""
     try:
-        tts = gTTS(text=text_to_speak, lang=lang_code, slow=False)
+        cleaned = clean_text_for_speech(text_to_speak)
+        tts = gTTS(text=cleaned, lang=lang_code, slow=False)
         fp = BytesIO()
         tts.write_to_fp(fp)
         fp.seek(0)
@@ -638,7 +647,7 @@ for item in scholarships_data:
     state_match = "All States" in item["states"] or candidate_state in item["states"]
     income_match = candidate_income in item["target_income"]
     
-    # STRICT EXACT COURSE MATCH ONLY (NO WILD CARD 'ALL')
+    # STRICT EXACT COURSE MATCH ONLY
     course_match = candidate_course_code in item["courses"]
     
     oku_match = True
@@ -672,32 +681,88 @@ st.divider()
 if btn_search:
     st.success(f"✅ Filter Updated! Exact matches found for [{selected_course_label}] with SPM results: {total_as}A, {total_credits} Credits, {total_passes} Passes.")
 
+# Pagination Logic
+items_per_page = 10
+total_pages = max(1, (len(matched_list) + items_per_page - 1) // items_per_page)
+if matched_list:
+    page = st.number_input("Halaman / Page", min_value=1, max_value=total_pages, value=1)
+    start_idx = (page - 1) * items_per_page
+    end_idx = start_idx + items_per_page
+    current_page_items = matched_list[start_idx:end_idx]
+else:
+    current_page_items = []
+
+# ---------------------------------------------------------
+# COMPREHENSIVE TEXT-TO-SPEECH FOR BLIND STUDENTS
+# ---------------------------------------------------------
 if matched_list:
     col_tts1, col_tts2 = st.columns([1, 3])
     with col_tts1:
         if st.button(t["tts_button"]):
-            summary_text = (
-                f"Salam {student_name}, carian mendapati {len(matched_list)} program bantuan kewangan yang padan khusus bagi bidang {selected_course_label}."
-                if st.session_state.lang == "BM" else
-                f"Hello {student_name}, search found {len(matched_list)} financial aid programs matching specifically for {selected_course_label}."
-            )
-            generate_audio_player(summary_text, lang_code="ms" if st.session_state.lang == "BM" else "en")
+            # Build full spoken script
+            if st.session_state.lang == "BM":
+                spoken_script = (
+                    f"Salam {student_name if student_name else 'pelajar'}. "
+                    f"Carian mendapati sebanyak {len(matched_list)} bantuan kewangan untuk bidang {selected_course_label}. "
+                    f"Berikut adalah senarai bagi halaman ini. "
+                )
+                for idx, item in enumerate(current_page_items, start=1):
+                    r = item.get("requirements", {})
+                    req_desc = []
+                    if r.get("min_a", 0) > 0:
+                        req_desc.append(f"sekurang-kurangnya {r['min_a']} A")
+                    if r.get("min_credits", 0) > 0:
+                        req_desc.append(f"sekurang-kurangnya {r['min_credits']} kredit")
+                    if r.get("min_passes", 0) > 0:
+                        req_desc.append(f"sekurang-kurangnya {r['min_passes']} lulus")
+                    req_str = " dan ".join(req_desc) if req_desc else "lulus SPM"
+                    
+                    funding = item["funding_details"].get("BM", item["funding_details"]["EN"])
+                    
+                    spoken_script += (
+                        f"Nombor {idx}: {item['name']}. "
+                        f"Disediakan oleh {item['provider']}. "
+                        f"Syarat SPM: {req_str}. "
+                        f"Skop bantuan: {funding}. "
+                        f"Tarikh tutup permohonan: {item['deadline']}. "
+                    )
+            else:
+                spoken_script = (
+                    f"Hello {student_name if student_name else 'student'}. "
+                    f"The search found {len(matched_list)} financial aid matches for {selected_course_label}. "
+                    f"Here is the list of results on this page. "
+                )
+                for idx, item in enumerate(current_page_items, start=1):
+                    r = item.get("requirements", {})
+                    req_desc = []
+                    if r.get("min_a", 0) > 0:
+                        req_desc.append(f"at least {r['min_a']} As")
+                    if r.get("min_credits", 0) > 0:
+                        req_desc.append(f"at least {r['min_credits']} credits")
+                    if r.get("min_passes", 0) > 0:
+                        req_desc.append(f"at least {r['min_passes']} passes")
+                    req_str = " and ".join(req_desc) if req_desc else "SPM pass"
+                    
+                    funding = item["funding_details"].get("EN", item["funding_details"]["BM"])
+                    
+                    spoken_script += (
+                        f"Number {idx}: {item['name']}. "
+                        f"Provided by {item['provider']}. "
+                        f"SPM requirement: {req_str}. "
+                        f"Funding details: {funding}. "
+                        f"Application deadline: {item['deadline']}. "
+                    )
+
+            generate_audio_player(spoken_script, lang_code="ms" if st.session_state.lang == "BM" else "en")
 
 st.subheader(t["results_header"])
 
 if not matched_list:
     st.info(t["no_results"])
 else:
-    items_per_page = 10
-    total_pages = max(1, (len(matched_list) + items_per_page - 1) // items_per_page)
-    page = st.number_input("Halaman / Page", min_value=1, max_value=total_pages, value=1)
-    
-    start_idx = (page - 1) * items_per_page
-    end_idx = start_idx + items_per_page
-    
     st.caption(f"Showing {start_idx + 1} - {min(end_idx, len(matched_list))} of {len(matched_list)} matching scholarships.")
 
-    for item in matched_list[start_idx:end_idx]:
+    for item in current_page_items:
         oku_badge = f"<span class='badge-oku'>♿ OKU Friendly</span>" if item["is_oku_friendly"] else ""
         
         r = item.get("requirements", {})
